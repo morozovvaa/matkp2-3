@@ -173,19 +173,25 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 ```
-Установка PyInstaller
-3. Создание исполняемых файлов
-Для каждой операционной системы создан отдельный скрипт сборки.
-• Windows
-*build_windows.bat*
+
+Установка PyInstaller  
+```
+pip install pyinstaller
+```
+
+**Создание исполняемых файлов**  
+Для каждой операционной системы создан отдельный скрипт сборки.  
+
+• Windows  
+*build_windows.bat*  
 ```
 @echo off
 pyinstaller --onefile --add-data "sounds;sounds" --add-data "images;images" main.py
 pause
 ```
 
-• macOS
-*build_macos.sh*
+• macOS  
+*build_macos.sh*  
 ```
 #!/bin/bash
 pyinstaller --onefile --add-data "resources:resources" main.py
@@ -196,8 +202,8 @@ chmod +x build_macos.sh
 ./build_macos.sh
 ```
 
-• Linux
-*build_linux.sh*
+• Linux  
+*build_linux.sh*  
 ```
 #!/bin/bash
 pyinstaller --onefile --add-data "resources:resources" main.py
@@ -208,4 +214,4 @@ chmod +x build_linux.sh
 ./build_linux.sh
 ```
 
-В итоге в папке dist создан файл main.exe
+В итоге в папке dist создан иполняемый файл *main.exe* игры для Windows
