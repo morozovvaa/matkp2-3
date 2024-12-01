@@ -135,3 +135,77 @@ def create_bonus(ai_settings, screen, bonuses, alien):
 Также для щита отслеживается его продолжительность с помощью таймера.
 
 ### 5. Сборка игры в исполняемый файлен
+Структура кода:
+```
+alien_invasion/
+│
+├── main.py              # Главный файл, запускающий игру
+├── settings.py          # Настройки игры (размер экрана, параметры скорости и т.д.)
+├── ship.py              # Класс для корабля игрока
+├── alien.py             # Класс для пришельцев
+├── bullet.py            # Класс для пуль
+├── button.py            # Класс для кнопки
+├── functions.py         # Вспомогательные функции (для создания флота, проверки столкновений и т.д.)
+├── bonus.py             # Класс для отслеживания статистики игры (очки, жизни, уровень и т.д.)
+├── stats.py             # Класс для бонусов (жизнь, щит)
+│
+├── sounds/              # Папка со звуками
+│   ├── laser.wav        # Звук выстрела
+│   ├── explosion.wav    # Звук взрыва пришельца
+│   ├── life_lost.wav    # Звук потери жизни
+│   └── game_over.wav    # Звук окончания игры
+│
+└── images/                # Папка с изображениями
+    ├── spaceship.bmp      # Изображение корабля
+    ├── alienship.bmp      # Изображение прищельцев
+    ├── bonus_life.bmp     # Изображение бонуса "жизнь"
+    └── bonus_shield.bmp   # Изображение бонуса "щит"
+```
+В коде используются относительные пути для загрузки файлов. Для этого была создана функция *resource_path*
+```
+def resource_path(relative_path):
+    """Определяет абсолютный путь к ресурсу, независимо от того, где запущен файл."""
+    try:
+        # Для PyInstaller
+        base_path = sys._MEIPASS
+    except Exception:
+        # Для нормальной работы в разработке
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+```
+Установка PyInstaller
+3. Создание исполняемых файлов
+Для каждой операционной системы создан отдельный скрипт сборки.
+• Windows
+*build_windows.bat*
+```
+@echo off
+pyinstaller --onefile --add-data "sounds;sounds" --add-data "images;images" main.py
+pause
+```
+
+• macOS
+*build_macos.sh*
+```
+#!/bin/bash
+pyinstaller --onefile --add-data "resources:resources" main.py
+```
+Сделайте скрипт исполняемым и запустите его:
+```
+chmod +x build_macos.sh
+./build_macos.sh
+```
+
+• Linux
+*build_linux.sh*
+```
+#!/bin/bash
+pyinstaller --onefile --add-data "resources:resources" main.py
+```
+Сделайте скрипт исполняемым и запустите его:
+```
+chmod +x build_linux.sh
+./build_linux.sh
+```
+
+В итоге в папке dist создан файл main.exe
