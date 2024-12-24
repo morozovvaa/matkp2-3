@@ -194,7 +194,7 @@ pause
 *build_macos.sh*  
 ```
 #!/bin/bash
-pyinstaller --onefile --add-data "resources:resources" main.py
+pyinstaller --onefile --add-data "sounds:sounds" --add-data "images:images" main.py
 ```
 Сделайте скрипт исполняемым и запустите его:
 ```
@@ -206,7 +206,7 @@ chmod +x build_macos.sh
 *build_linux.sh*  
 ```
 #!/bin/bash
-pyinstaller --onefile --add-data "resources:resources" main.py
+pyinstaller --onefile --add-data "sounds:sounds" --add-data "images:images" main.py
 ```
 Сделайте скрипт исполняемым и запустите его:
 ```
